@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.min.edu.model.approval.IApprovalService;
 import com.min.edu.model.emp.IEmpService;
 import com.min.edu.model.main.IMainService;
 
@@ -37,9 +38,6 @@ public class MainController {
 	@Autowired
 	private IApprovalService appService;
 	
-	@Autowired
-	private IApprovalService approvalServiceImpl;
-	
 	@RequestMapping(value="/home.do", method=RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
 		
@@ -59,9 +57,9 @@ public class MainController {
 		System.out.println(paging);
 		
 		
-		List<Approval_Doc> doclist = approvalServiceImpl.selectListWait(doc);
+		List<Approval_Doc> doclist = appService.selectListWait(doc);
 		for (Approval_Doc Doc1 : doclist) {
-			Doc1.setEmp_nm(approvalServiceImpl.selectEmpInfo(Doc1.getEmp_no()).getEmp_nm());
+			Doc1.setEmp_nm(appService.selectEmpInfo(Doc1.getEmp_no()).getEmp_nm());
 //			System.out.println(approvalServiceImpl.selectEmpInfo(Doc1.getEmp_no()).getEmp_nm());
 		}	
 		
@@ -78,7 +76,7 @@ public class MainController {
       model.addAttribute("noticeList", noticeList);
       logger.info("로그인한 사원번호{}",session.getAttribute("loginEmp"));
        int emp_no = (Integer)session.getAttribute("loginEmp");
-       Emp emp = workLogService.selectEmpNo(emp_no);
+       Emp emp = appService.selectEmpInfo(emp_no);
        model.addAttribute("emp",emp);
        
        session.setAttribute("loc", "./main.do");

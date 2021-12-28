@@ -911,11 +911,7 @@ i {
 			<li class="w3-bar-item nav1"><i class="fas fa-sms"></i>채팅
 				<ul class="nav-flyout">
 				<li class="w3-bar-item w3-button" onclick="openChat()">채채팅팅
-					<input type="hidden" value="${loginEmp}" id="pInput">
-					<input type="button" value="전달" onclick="setChildText()">
 				</li>
-					<li class="w3-bar-item w3-button" value="./chatOpen.do">채팅 시작</li>
-					<!-- <li class="w3-bar-item w3-button" value="./socketOpen.do">채팅 시작</li> -->
 				</ul></li>
 			<c:if test="${emp.dept_no eq 10}">
 				<li class="w3-bar-item nav1"><i class="fas fa-file"></i>양식함
